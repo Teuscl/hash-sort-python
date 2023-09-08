@@ -127,19 +127,40 @@ def delete_emp():
 
 def print_employees():
     os.system('cls || clear')
-    print("#List of employees#")
+    print("==========List of employees==========")
+    if(len(array_emp) == 0):
+        print("There are no employees registered")
+        input()
+    
     for employee in array_emp:
         print(f'-> {employee}')
     input("Press any key to continue....")      
 
 def salaries_higher10k():
-    
-    ##Implementar algoritmo de ordenação de O(n²)
+    buffer = []
+
+    #Make an arrray only with employees with salaries higher than 10k
+    for emp in array_emp:
+        if emp.salary > 10000:
+            buffer.append(emp)
+
     os.system('cls || clear')
-    print("##Salaries Higher than 10k##")
-    for employee in array_emp:
-        if employee.salary > 10000:
-            print(f'-> {employee}')
+    print("===========Salaries Higher than 10k===========")
+    if(len(buffer) == 0):
+        print("There are no employees with salary higher than 10k")
+        input()
+
+    #Insertion sort, decreasing order
+    for i in range(0, len(buffer)):
+        max = i
+        for j in range(i+1,len(buffer)):
+            if buffer[j].salary > buffer[max].salary:
+                max = j
+        (buffer[i],buffer[max]) = (buffer[max], buffer[i]) #swap  
+         
+    #Print employees ordered by decreasing salary
+    for employee in buffer:
+        print(f'-> {employee}')
     input("Press any key to continue....")
                         
 
